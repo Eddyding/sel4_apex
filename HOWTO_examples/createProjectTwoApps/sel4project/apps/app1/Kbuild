@@ -1,0 +1,25 @@
+apps-$(CONFIG_APP_APP1) += app1
+
+# list of libraries the app needs to build
+app1-y = common libsel4 libmuslc \
+            libsel4muslcsys \
+            libsel4simple libsel4vka libsel4allocman libsel4vspace \
+	    libsel4platsupport \
+            libsel4utils \
+            libcpio libelf \
+            libutils
+
+# set up correct simple lib for our kernel
+ifdef CONFIG_KERNEL_STABLE
+app1-$(CONFIG_LIB_SEL4_SIMPLE_STABLE) += libsel4simple-stable
+else
+app1-$(CONFIG_LIB_SEL4_SIMPLE_DEFAULT) += libsel4simple-default
+endif
+
+# add the companion app as a component so that we can elf load it
+app1-components-y += app2
+app1-components = $(addprefix $(STAGE_BASE)/bin/, $(app1-components-y))
+
+app1: export COMPONENTS=${app1-components}
+app1: ${app1-components-y} kernel_elf $(app1-y)
+

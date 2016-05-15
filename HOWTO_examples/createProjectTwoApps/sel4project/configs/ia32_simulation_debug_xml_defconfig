@@ -58,6 +58,7 @@ CONFIG_OPTIMISATION_O2=y
 # seL4 Applications
 #
 CONFIG_APP_APP1=y
+CONFIG_APP_APP2=y
 
 #
 # seL4 Libraries

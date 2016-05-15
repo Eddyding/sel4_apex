@@ -1,0 +1,4 @@
+components-$(CONFIG_APP_APP2) += app2
+app2: common libsel4 libmuslc libsel4muslcsys libutils
+
+
