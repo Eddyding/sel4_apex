@@ -1,0 +1,10 @@
+apps-$(CONFIG_APP_APP1) += app1
+
+# list of libraries the app needs to build
+app1-y = common libsel4 libmuslc \
+            libsel4muslcsys \
+            libsel4platsupport \
+            libutils
+
+app1: kernel_elf $(app1-y)
+
